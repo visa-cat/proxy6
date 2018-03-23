@@ -73,7 +73,8 @@ class Proxy6{
      */
     setType(ids,type){
         if(!ids) throw new Error(`Invalid ids`);
-        if(!Array.isArray(ids)) ids = [ids.split(',')];
+        if(typeof ids === 'number') ids = [ids.toString()];
+        if(!Array.isArray(ids)) ids = ids.split(',');
         if(!['http','socks'].includes(type)) throw new Error(`Invalid type: ${type}. Available: http,socks`);
         return this.request.call(this,'settype',{ids:ids.join(),type},"GET")
         .return(true)
@@ -90,7 +91,8 @@ class Proxy6{
         if(!_new) throw new Error(`New is not defined`);
         if(_new.length > 50) throw new Error(`New is too long: ${_new.length}. Max: 50`);
         if(!old && !ids) throw new Error(`Ids or old are required for this method`);
-        if(ids && !Array.isArray(ids)) ids = [ids.split(',')];
+        if(ids && typeof ids === 'number') ids = [ids.toString()];
+        if(ids && !Array.isArray(ids)) ids = ids.split(',');
 
         return this.request.call(this,'setdescr',{new:_new,old,ids:ids.join()},"GET")
     }
@@ -116,6 +118,9 @@ class Proxy6{
             if(available<count) throw new Error(`Not enought proxies available. Required: ${count}, available: ${available}`);
             return this.request.call(this,'buy',{count,period,country,descr,version,type},"GET")
         })
+        .then(data=>{
+            return Object.values(data.list)
+        })
     }
 
     /**
@@ -127,7 +132,8 @@ class Proxy6{
     prolong(period,ids){
         if(period<=0) throw new Error(`Invalid period. Must be >= 1`);
         if(!ids) throw new Error(`Invalid ids`);
-        if(!Array.isArray(ids)) ids = [ids.split(',')];
+        if(typeof ids === 'number') ids = [ids.toString()];
+        if(!Array.isArray(ids)) ids = ids.split(',');
         return this.request.call(this,'prolong',{period,ids:ids.join()},"GET")
     }
 
@@ -139,7 +145,8 @@ class Proxy6{
      */
     deleteProxy(ids,descr){
         if(!descr && !ids) throw new Error(`Ids or descr are required for this method`);
-        if(ids && !Array.isArray(ids)) ids = [ids.split(',')];
+        if(ids && typeof ids === 'number') ids = [ids.toString()];
+        if(ids && !Array.isArray(ids)) ids = ids.split(',');
         return this.request.call(this,'delete',{ids:ids.join(),descr},"GET")
     }
 
@@ -150,7 +157,8 @@ class Proxy6{
      */
     check(ids){
         if(!ids) throw new Error(`Invalid ids`);
-        if(!Array.isArray(ids)) ids = [ids.split(',')];
+        if(typeof ids === 'number') ids = [ids.toString()];
+        if(!Array.isArray(ids)) ids = ids.split(',');
         return this.request.call(this,'check',{ids:ids.join()},"GET")
         .then(response=>response.proxy_status)
     }
