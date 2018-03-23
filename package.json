@@ -1,0 +1,27 @@
+{
+  "name": "proxy6",
+  "version": "1.0.0",
+  "description": "proxy6.net api",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "BadVolt",
+  "license": "ISC",
+  "keywords": [
+    "proxy6"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanMMM/proxy6.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IvanMMM/proxy6/issues"
+  },
+  "homepage": "https://github.com/IvanMMM/proxy6#readme"
+}
