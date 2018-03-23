@@ -1,6 +1,6 @@
 {
-  "name": "proxy6",
-  "version": "1.0.0",
+  "name": "node-proxy6",
+  "version": "1.0.1",
   "description": "proxy6.net api",
   "main": "index.js",
   "dependencies": {
