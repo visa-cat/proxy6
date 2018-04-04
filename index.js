@@ -119,7 +119,12 @@ class Proxy6{
             return this.request.call(this,'buy',{count,period,country,descr,version,type},"GET")
         })
         .then(data=>{
-            return Object.values(data.list)
+            let proxies = Object.values(data.list);
+            delete data.list;
+            return {
+                payload:data,
+                proxies
+            }
         })
     }
 
@@ -135,6 +140,14 @@ class Proxy6{
         if(typeof ids === 'number') ids = [ids.toString()];
         if(!Array.isArray(ids)) ids = ids.split(',');
         return this.request.call(this,'prolong',{period,ids:ids.join()},"GET")
+        .then(data=>{
+            let proxies = Object.values(data.list);
+            delete data.list;
+            return {
+                payload:data,
+                proxies
+            }
+        })
     }
 
     /**
