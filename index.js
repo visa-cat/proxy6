@@ -190,16 +190,25 @@ class Proxy6{
         let options = {
             url:`${this._baseurl}/api/${this._key}/${endpoint}`,
             method:method,
-            json:true,
-            rejectUnauthorized: false
+            json:true
         };
         if(method==="GET"){
             options.qs = params;
         }else{
             options.form = params;
         }
+        if(this.proxy){
+            options.rejectUnauthorized = false;
+            options.proxy = this.proxy;
+        }
+        let startedAt;
+        if(this.debug){
+            startedAt = Date.now();
+            console.info(`Proxy6: ${method} ${endpoint} >>> ${JSON.stringify(params)}`);
+        }
         return rp(options)
         .then(body=>{
+            if(this.debug) console.info(`Proxy6: ${method} ${endpoint} <<< ${JSON.stringify(body)} <<< ${Date.now() - startedAt} ms`);
             if(body.status === 'yes'){
                 this.user = {userId:body.user_id,balance:body.balance,currency:body.currency};
                 delete body.status;
