@@ -61,6 +61,7 @@ class Proxy6{
      */
     getProxy(state='all',descr){
         if(!['active','expired','expiring','all'].includes(state)) throw new Error(`Invalid state: ${state}. Available: active,expired,expiring,all`);
+        if(descr && typeof descr !== 'string') throw new Error(`Invalid descr type: ${typeof descr}. Must me string`);
         return this.request.call(this,'getproxy',{state,descr},"GET")
         .then(response=>response.list)
     }
@@ -111,6 +112,7 @@ class Proxy6{
         if(count<=0) throw new Error(`Invalid count. Must be >= 1`);
         if(period<=0) throw new Error(`Invalid period. Must be >= 1`);
         if(!country) throw new Error(`Invalid country`);
+        if(descr && typeof descr !== 'string') throw new Error(`Invalid descr type: ${typeof descr}. Must me string`);
         if(!['http','socks'].includes(type)) throw new Error(`Invalid type: ${type}. Available: http,socks`);
         if(![3,4,6].includes(version)) throw new Error(`Invalid version: ${version}. Available: 4 - IPv4, 3 - IPv4 Shared, 6 - IPv6`);
         return this.getCount(country,version)
@@ -158,6 +160,7 @@ class Proxy6{
      */
     deleteProxy(ids,descr){
         if(!descr && !ids) throw new Error(`Ids or descr are required for this method`);
+        if(descr && typeof descr !== 'string') throw new Error(`Invalid descr type: ${typeof descr}. Must me string`);
         if(ids && typeof ids === 'number') ids = [ids.toString()];
         if(ids && !Array.isArray(ids)) ids = ids.split(',');
         return this.request.call(this,'delete',{ids:ids.join(),descr},"GET")
