@@ -1,5 +1,8 @@
 const util = require("util");
 
+/**
+ * @type Object
+ */
 let exceptions = {
     '30':function(){
         this.name = "Error unknown";
