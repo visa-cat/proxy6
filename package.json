@@ -1,5 +1,5 @@
 {
-  "name": "node-proxy6",
+  "name": "@visa-cat/node-proxy6",
   "version": "1.0.6",
   "description": "proxy6.net api",
   "main": "index.js",
