@@ -1,6 +1,6 @@
 export = Proxy6;
 declare class Proxy6 {
-    constructor(key: any);
+    constructor(key: any, url?: string);
     _baseurl: string;
     _key: any;
     /**

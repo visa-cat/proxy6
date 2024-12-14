@@ -4,9 +4,9 @@ const rp = require('request-promise');
 const ex = require('./exceptions');
 
 class Proxy6{
-    constructor(key){
+    constructor(key, url = 'https://proxy6.net'){
         if(!key) throw new Error(`Invalid Key`);
-        this._baseurl = 'https://proxy6.net';
+        this._baseurl = url;
 
         this._key = key;
     }
